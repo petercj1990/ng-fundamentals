@@ -1,4 +1,6 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core'
+import { Component, EventEmitter, Inject, OnInit } from '@angular/core'
+import { AuthService } from '../user/auth.service';
+import { IUser } from '../user/user.model';
 
 @Component({
   selector: 'nav-bar',
@@ -11,5 +13,13 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
   `]
 })
 
-export class navBarComponent {
+export class navBarComponent implements OnInit{
+  /**
+   *
+   */
+  user: IUser;
+  constructor(@Inject(AuthService)public authService: AuthService) {
+
+  }
+
 }

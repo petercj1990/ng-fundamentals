@@ -27,9 +27,15 @@
       </ul>
       <div class="navbar-header navbar-right">
         <ul class="nav navbar-nav">
-          <li>
-            <a [routerLink]="['user/profile']">Welcome John</a>
+          <li *ngIf="authService.isAuthenticated(); else login">
+            <a [routerLink]="['user/profile']">Welcome {{authService.currentUser.firstName}}</a>
           </li>
+          <ng-template #login>
+            <li>
+              <a [routerLink]="['user/login']">login</a>
+            </li>
+          </ng-template>
+
         </ul>
       </div>
       <form id="searchForm"  class="navbar-form navbar-right"  >

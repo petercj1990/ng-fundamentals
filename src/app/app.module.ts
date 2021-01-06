@@ -17,6 +17,9 @@ import {
   EventService,
   EventThumbnailComponent
 } from './events/index';
+import { LoginComponent } from './user/login.components';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from './user/auth.service';
 
 @NgModule({
   declarations: [
@@ -31,16 +34,18 @@ import {
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
     EventService,
     EventRouteActivator,
+    EventListResolverService,
+    AuthService,
     {
       provide: 'canDeactivateCreateEvent',
       useValue: checkDirtyState
-    },
-    EventListResolverService
+    }
   ],
   bootstrap: [AppComponent]
 })

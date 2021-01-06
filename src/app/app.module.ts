@@ -3,16 +3,50 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import {EventAppComponent} from './events-app.component';
+import {navBarComponent} from './nav/navbar.component';
+import { appRoutes } from 'src/routes';
+import { RouterModule } from '@angular/router';
+import { Error404Component } from './errors/404.component';
+import {
+  EventListComponent,
+  CreateEventsComponent,
+  EventDetailComponent,
+  EventListResolverService,
+  EventRouteActivator,
+  EventService,
+  EventThumbnailComponent
+} from './events/index';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    EventAppComponent,
+    EventListComponent,
+    EventThumbnailComponent,
+    navBarComponent,
+    EventDetailComponent,
+    CreateEventsComponent,
+    Error404Component
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [
+    EventService,
+    EventRouteActivator,
+    {
+      provide: 'canDeactivateCreateEvent',
+      useValue: checkDirtyState
+    },
+    EventListResolverService
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
+export function checkDirtyState() {
+  return false;
+}
+

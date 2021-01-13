@@ -13,13 +13,12 @@ import { IUser } from '../user/user.model';
   `]
 })
 
-export class navBarComponent implements OnInit{
+export class NavBarComponent {
   /**
    *
    */
   user: IUser;
   constructor(@Inject(AuthService)public authService: AuthService) {
-
   }
 
 }
